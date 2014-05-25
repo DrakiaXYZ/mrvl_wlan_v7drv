@@ -1,0 +1,8 @@
+
+WLAN = $(wildcard $(pwd)/../mrvl_wlan_v7drv/extracted/*/.)
+
+ifndef EXPORT_ONLY
+	depends = linux
+	configure = chmod u+w Makefile && sed -i 's/^\(BUILD_DFS_PASSIVE_SCAN = \)\(.*\)/\10/' Makefile
+	build = ARCH=$(ARCH) make CROSS_COMPILE=$(CROSS_COMPILE) SOC=W8864 KDIR=$(LINUX)/.. PWD=`pwd` all
+endif
